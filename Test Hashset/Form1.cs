@@ -19,7 +19,7 @@ namespace Test_Hashset
 
         private void button1_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i <= DB.ID.Count; i++)
+            for (int i = 0; i <= DB.ID.Count-1; i++)
             {
                 string id = DB.ID.ElementAt<string>(i);
                 string pw = DB.PW.ElementAt<string>(i);
@@ -30,26 +30,35 @@ namespace Test_Hashset
                 if (textBox2.Text == pw)
                     vpw = true;
                 if (vid == vpw)
+                {
                     MessageBox.Show("Connexion reussie !");
+                    return;
+                }
+                    
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             Form2 f2 = new Form2();
-            f2.ShowDialog();
             if (f2.ShowDialog(this) == DialogResult.OK) // PROBLEME ICI !!!!!
             {
                 if (f2.textBox1.Text != "")
                 {
-                    DB.ID.Add(f2.textBox1.Text);
+                    
                     if (f2.textBox2.Text != "" & f2.textBox3.Text != "")
-                        if (f2.textBox2 == f2.textBox3)
+                    {
+                        if (f2.textBox2.Text == f2.textBox3.Text)
                         {
+                            DB.ID.Add(f2.textBox1.Text);
                             DB.PW.Add(f2.textBox2.Text);
-
+//                            MessageBox.Show("L'utilisateur est bien inscrit avec l'id : " + DB.ID.ElementAt(0) + " et le mot de passe : " + DB.PW.ElementAt(0), "Test");
+//                            f2.Close();
                         }
-                    MessageBox.Show("L'utilisateur est bien inscrit !");
+                    }
+
+                    
+
                 }
             }
         }
